@@ -13,6 +13,102 @@
  *       type: http
  *       scheme: bearer
  *       bearerFormat: JWT
+ *   schemas:
+ *     PosterInput:
+ *       type: object
+ *       required:
+ *         - categoryId
+ *         - image
+ *       properties:
+ *         categoryId:
+ *           type: string
+ *         image:
+ *           type: string
+ *           format: binary
+ *     Poster:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *         categoryId:
+ *           type: string
+ *         image:
+ *           type: string
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *         category:
+ *           $ref: '#/components/schemas/Category'
+ *     PosterResponse:
+ *       type: object
+ *       properties:
+ *         status:
+ *           type: integer
+ *         success:
+ *           type: boolean
+ *         message:
+ *           type: string
+ *         data:
+ *           $ref: '#/components/schemas/Poster'
+ *     PostersResponse:
+ *       type: object
+ *       properties:
+ *         status:
+ *           type: integer
+ *         success:
+ *           type: boolean
+ *         message:
+ *           type: string
+ *         data:
+ *           type: array
+ *           items:
+ *             $ref: '#/components/schemas/Poster'
+ *     SuccessResponse:
+ *       type: object
+ *       properties:
+ *         status:
+ *           type: integer
+ *         success:
+ *           type: boolean
+ *         message:
+ *           type: string
+ *     ErrorResponse:
+ *       type: object
+ *       properties:
+ *         status:
+ *           type: integer
+ *         success:
+ *           type: boolean
+ *         message:
+ *           type: string
+ *   responses:
+ *     BadRequest:
+ *       description: Bad request
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ErrorResponse'
+ *     Unauthorized:
+ *       description: Unauthorized
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ErrorResponse'
+ *     Forbidden:
+ *       description: Forbidden
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ErrorResponse'
+ *     NotFound:
+ *       description: Not found
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ErrorResponse'
  */
 
 /**
@@ -188,106 +284,4 @@
  *         $ref: '#/components/responses/Unauthorized'
  *       404:
  *         $ref: '#/components/responses/NotFound'
- */
-
-/**
- * @swagger
- * components:
- *   schemas:
- *     PosterInput:
- *       type: object
- *       required:
- *         - categoryId
- *         - image
- *       properties:
- *         categoryId:
- *           type: string
- *         image:
- *           type: string
- *           format: binary
- *     Poster:
- *       type: object
- *       properties:
- *         id:
- *           type: string
- *         categoryId:
- *           type: string
- *         image:
- *           type: string
- *         createdAt:
- *           type: string
- *           format: date-time
- *         updatedAt:
- *           type: string
- *           format: date-time
- *         category:
- *           $ref: '#/components/schemas/Category'
- *     PosterResponse:
- *       type: object
- *       properties:
- *         status:
- *           type: integer
- *         success:
- *           type: boolean
- *         message:
- *           type: string
- *         data:
- *           $ref: '#/components/schemas/Poster'
- *     PostersResponse:
- *       type: object
- *       properties:
- *         status:
- *           type: integer
- *         success:
- *           type: boolean
- *         message:
- *           type: string
- *         data:
- *           type: array
- *           items:
- *             $ref: '#/components/schemas/Poster'
- *     SuccessResponse:
- *       type: object
- *       properties:
- *         status:
- *           type: integer
- *         success:
- *           type: boolean
- *         message:
- *           type: string
- *   responses:
- *     BadRequest:
- *       description: Bad request
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/ErrorResponse'
- *     Unauthorized:
- *       description: Unauthorized
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/ErrorResponse'
- *     Forbidden:
- *       description: Forbidden
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/ErrorResponse'
- *     NotFound:
- *       description: Not found
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/ErrorResponse'
- *   schemas:
- *     ErrorResponse:
- *       type: object
- *       properties:
- *         status:
- *           type: integer
- *         success:
- *           type: boolean
- *         message:
- *           type: string
  */

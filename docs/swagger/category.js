@@ -13,6 +13,81 @@
  *       type: http
  *       scheme: bearer
  *       bearerFormat: JWT
+ *   schemas:
+ *     CategoryInput:
+ *       type: object
+ *       required:
+ *         - name
+ *       properties:
+ *         name:
+ *           type: string
+ *           description: The name of the category
+ *     Category:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *           description: The auto-generated id of the category
+ *         name:
+ *           type: string
+ *           description: The name of the category
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: The creation date of the category
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           description: The last update date of the category
+ *     CategoryResponse:
+ *       type: object
+ *       properties:
+ *         status:
+ *           type: integer
+ *         success:
+ *           type: boolean
+ *         message:
+ *           type: string
+ *         data:
+ *           $ref: '#/components/schemas/Category'
+ *     CategoriesResponse:
+ *       type: object
+ *       properties:
+ *         status:
+ *           type: integer
+ *         success:
+ *           type: boolean
+ *         message:
+ *           type: string
+ *         data:
+ *           type: array
+ *           items:
+ *             $ref: '#/components/schemas/Category'
+ *   responses:
+ *     BadRequest:
+ *       description: Bad request
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ErrorResponse'
+ *     Unauthorized:
+ *       description: Unauthorized
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ErrorResponse'
+ *     Forbidden:
+ *       description: Forbidden
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ErrorResponse'
+ *     NotFound:
+ *       description: Not found
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ErrorResponse'
  */
 
 /**
@@ -133,105 +208,11 @@
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/SuccessResponse'
+ *               $ref: '#/components/schemas/CategoryResponse'
  *       401:
  *         $ref: '#/components/responses/Unauthorized'
  *       403:
  *         $ref: '#/components/responses/Forbidden'
  *       404:
  *         $ref: '#/components/responses/NotFound'
- */
-
-/**
- * @swagger
- * components:
- *   schemas:
- *     CategoryInput:
- *       type: object
- *       required:
- *         - name
- *       properties:
- *         name:
- *           type: string
- *     Category:
- *       type: object
- *       properties:
- *         id:
- *           type: string
- *         name:
- *           type: string
- *         createdAt:
- *           type: string
- *           format: date-time
- *         updatedAt:
- *           type: string
- *           format: date-time
- *     CategoryResponse:
- *       type: object
- *       properties:
- *         status:
- *           type: integer
- *         success:
- *           type: boolean
- *         message:
- *           type: string
- *         data:
- *           $ref: '#/components/schemas/Category'
- *     CategoriesResponse:
- *       type: object
- *       properties:
- *         status:
- *           type: integer
- *         success:
- *           type: boolean
- *         message:
- *           type: string
- *         data:
- *           type: array
- *           items:
- *             $ref: '#/components/schemas/Category'
- *     SuccessResponse:
- *       type: object
- *       properties:
- *         status:
- *           type: integer
- *         success:
- *           type: boolean
- *         message:
- *           type: string
- *   responses:
- *     BadRequest:
- *       description: Bad request
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/ErrorResponse'
- *     Unauthorized:
- *       description: Unauthorized
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/ErrorResponse'
- *     Forbidden:
- *       description: Forbidden
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/ErrorResponse'
- *     NotFound:
- *       description: Not found
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/ErrorResponse'
- *   schemas:
- *     ErrorResponse:
- *       type: object
- *       properties:
- *         status:
- *           type: integer
- *         success:
- *           type: boolean
- *         message:
- *           type: string
  */
