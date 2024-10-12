@@ -4,7 +4,7 @@ const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerDefinition = {
   openapi: '3.0.0',
   info: {
-    title: 'Diagnosis',
+    title: 'Brandvilla',
     version: '1.0.0',
     description: 'APIs Documentation',
     contact: {
