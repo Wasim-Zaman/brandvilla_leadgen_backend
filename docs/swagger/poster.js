@@ -145,6 +145,26 @@
  *               $ref: '#/components/schemas/PostersResponse'
  *       404:
  *         $ref: '#/components/responses/NotFound'
+ *
+ * /api/poster/v1/posters/category/name/{categoryName}:
+ *   get:
+ *     summary: Get all posters by category name
+ *     tags: [Poster]
+ *     parameters:
+ *       - in: path
+ *         name: categoryName
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Posters retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/PostersResponse'
+ *       404:
+ *         $ref: '#/components/responses/NotFound'
  */
 
 /**

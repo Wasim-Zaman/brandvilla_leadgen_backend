@@ -10,6 +10,8 @@ require('dotenv').config();
 const AppError = require('./utils/error');
 const swaggerSpec = require('./config/swagger');
 const response = require('./utils/response');
+const posterRoutes = require('./routes/poster');
+const categoryRoutes = require('./routes/category');
 
 // Import loggers from config
 const { httpLogger, appLogger } = require('./config/logger');
@@ -38,6 +40,9 @@ app.use(cors());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Add your routes...
+app.use('/api/poster', posterRoutes);
+app.use('/api/category', categoryRoutes);
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Handle 404 errors
