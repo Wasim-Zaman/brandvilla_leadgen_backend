@@ -73,3 +73,40 @@ The API is documented using Swagger. Here's an example of the Category documenta
 ## Authentication
 
 Protected routes require a valid JWT token in the Authorization header:
+
+## File Upload
+
+Poster images are uploaded using the `multermate` middleware. The maximum file size is 5MB, and only image files are allowed.
+
+## Database Schema
+
+The project uses three main models:
+
+1. Admin
+2. Category
+3. Poster
+
+For detailed schema information, refer to the Prisma schema file:
+
+## Project Structure
+
+- `controllers/`: Contains the logic for handling requests and responses
+- `routes/`: Defines the API routes
+- `middleware/`: Custom middleware functions (e.g., authentication)
+- `utils/`: Utility functions and helpers
+- `docs/swagger/`: Swagger documentation files
+- `prisma/`: Prisma schema and migrations
+
+## Key Components
+
+### Poster Controller
+
+The Poster Controller handles all poster-related operations:
+
+### Category Controller
+
+The Category Controller manages category-related operations:
+
+### Admin Controller
+
+The Admin Controller handles admin creation and login:
