@@ -35,6 +35,8 @@ This project is a RESTful API for managing posters and categories. It's built wi
 
    ```
    DATABASE_URL="mysql://username:password@localhost:3306/database_name"
+   ADMIN_EMAIL="admin@example.com"
+   ADMIN_PASSWORD="your_secure_password"
    ```
 
 4. Run database migrations:
@@ -45,3 +47,29 @@ This project is a RESTful API for managing posters and categories. It's built wi
 ## Running the Application
 
 Start the server:
+
+```
+npm start
+```
+
+The API will be available at `http://localhost:<PORT>`.
+
+## API Documentation
+
+Swagger documentation is available at `/api-docs` when the server is running.
+
+## API Endpoints
+
+### Admin
+
+- `POST /api/admin/login`: Admin login
+
+### Categories
+
+### Swagger Documentation
+
+The API is documented using Swagger. Here's an example of the Category documentation:
+
+## Authentication
+
+Protected routes require a valid JWT token in the Authorization header:
