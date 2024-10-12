@@ -13,7 +13,7 @@ const uploadConfig = {
 };
 
 // Poster routes
-router.post('/v1/poster', isAdmin, uploadSingle(uploadConfig), posterController.createPoster);
+router.post('/v1/poster',  uploadSingle(uploadConfig), posterController.createPoster);
 router.get('/v1/posters', posterController.getPosters);
 router.get('/v1/poster/:id', posterController.getPosterById);
 router.put('/v1/poster/:id', isAdmin, uploadSingle(uploadConfig), posterController.updatePosterById);
