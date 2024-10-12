@@ -7,6 +7,16 @@
 
 /**
  * @swagger
+ * components:
+ *   securitySchemes:
+ *     bearerAuth:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
+ */
+
+/**
+ * @swagger
  * /api/poster/v1/poster:
  *   post:
  *     summary: Create a new poster
@@ -18,16 +28,7 @@
  *       content:
  *         multipart/form-data:
  *           schema:
- *             type: object
- *             required:
- *               - categoryId
- *               - image
- *             properties:
- *               categoryId:
- *                 type: string
- *               image:
- *                 type: string
- *                 format: binary
+ *             $ref: '#/components/schemas/PosterInput'
  *     responses:
  *       201:
  *         description: Poster created successfully
@@ -39,11 +40,15 @@
  *         $ref: '#/components/responses/BadRequest'
  *       401:
  *         $ref: '#/components/responses/Unauthorized'
+ *       403:
+ *         $ref: '#/components/responses/Forbidden'
  *
  * /api/poster/v1/posters:
  *   get:
  *     summary: Get all posters
  *     tags: [Poster]
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Posters retrieved successfully
@@ -51,6 +56,8 @@
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/PostersResponse'
+ *       401:
+ *         $ref: '#/components/responses/Unauthorized'
  *       404:
  *         $ref: '#/components/responses/NotFound'
  *
@@ -58,6 +65,8 @@
  *   get:
  *     summary: Get a poster by ID
  *     tags: [Poster]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -71,6 +80,8 @@
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/PosterResponse'
+ *       401:
+ *         $ref: '#/components/responses/Unauthorized'
  *       404:
  *         $ref: '#/components/responses/NotFound'
  *   put:
@@ -101,6 +112,8 @@
  *         $ref: '#/components/responses/BadRequest'
  *       401:
  *         $ref: '#/components/responses/Unauthorized'
+ *       403:
+ *         $ref: '#/components/responses/Forbidden'
  *       404:
  *         $ref: '#/components/responses/NotFound'
  *   delete:
@@ -123,6 +136,8 @@
  *               $ref: '#/components/schemas/SuccessResponse'
  *       401:
  *         $ref: '#/components/responses/Unauthorized'
+ *       403:
+ *         $ref: '#/components/responses/Forbidden'
  *       404:
  *         $ref: '#/components/responses/NotFound'
  *
@@ -130,6 +145,8 @@
  *   get:
  *     summary: Get all posters by category ID
  *     tags: [Poster]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: categoryId
@@ -143,6 +160,8 @@
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/PostersResponse'
+ *       401:
+ *         $ref: '#/components/responses/Unauthorized'
  *       404:
  *         $ref: '#/components/responses/NotFound'
  *
@@ -150,6 +169,8 @@
  *   get:
  *     summary: Get all posters by category name
  *     tags: [Poster]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: categoryName
@@ -163,6 +184,8 @@
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/PostersResponse'
+ *       401:
+ *         $ref: '#/components/responses/Unauthorized'
  *       404:
  *         $ref: '#/components/responses/NotFound'
  */
@@ -173,6 +196,9 @@
  *   schemas:
  *     PosterInput:
  *       type: object
+ *       required:
+ *         - categoryId
+ *         - image
  *       properties:
  *         categoryId:
  *           type: string
@@ -220,4 +246,48 @@
  *           type: array
  *           items:
  *             $ref: '#/components/schemas/Poster'
+ *     SuccessResponse:
+ *       type: object
+ *       properties:
+ *         status:
+ *           type: integer
+ *         success:
+ *           type: boolean
+ *         message:
+ *           type: string
+ *   responses:
+ *     BadRequest:
+ *       description: Bad request
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ErrorResponse'
+ *     Unauthorized:
+ *       description: Unauthorized
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ErrorResponse'
+ *     Forbidden:
+ *       description: Forbidden
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ErrorResponse'
+ *     NotFound:
+ *       description: Not found
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ErrorResponse'
+ *   schemas:
+ *     ErrorResponse:
+ *       type: object
+ *       properties:
+ *         status:
+ *           type: integer
+ *         success:
+ *           type: boolean
+ *         message:
+ *           type: string
  */

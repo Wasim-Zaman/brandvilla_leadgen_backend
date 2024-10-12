@@ -7,6 +7,16 @@
 
 /**
  * @swagger
+ * components:
+ *   securitySchemes:
+ *     bearerAuth:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
+ */
+
+/**
+ * @swagger
  * /api/category/v1/category:
  *   post:
  *     summary: Create a new category
@@ -18,13 +28,7 @@
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             required:
- *               - name
- *             properties:
- *               name:
- *                 type: string
- *                 description: The category name
+ *             $ref: '#/components/schemas/CategoryInput'
  *     responses:
  *       201:
  *         description: Category created successfully
@@ -36,11 +40,15 @@
  *         $ref: '#/components/responses/BadRequest'
  *       401:
  *         $ref: '#/components/responses/Unauthorized'
+ *       403:
+ *         $ref: '#/components/responses/Forbidden'
  *
  * /api/category/v1/categories:
  *   get:
  *     summary: Get all categories
  *     tags: [Category]
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Categories retrieved successfully
@@ -48,6 +56,8 @@
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/CategoriesResponse'
+ *       401:
+ *         $ref: '#/components/responses/Unauthorized'
  *       404:
  *         $ref: '#/components/responses/NotFound'
  *
@@ -55,6 +65,8 @@
  *   get:
  *     summary: Get a category by ID
  *     tags: [Category]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -68,6 +80,8 @@
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/CategoryResponse'
+ *       401:
+ *         $ref: '#/components/responses/Unauthorized'
  *       404:
  *         $ref: '#/components/responses/NotFound'
  *   put:
@@ -98,6 +112,8 @@
  *         $ref: '#/components/responses/BadRequest'
  *       401:
  *         $ref: '#/components/responses/Unauthorized'
+ *       403:
+ *         $ref: '#/components/responses/Forbidden'
  *       404:
  *         $ref: '#/components/responses/NotFound'
  *   delete:
@@ -120,6 +136,8 @@
  *               $ref: '#/components/schemas/SuccessResponse'
  *       401:
  *         $ref: '#/components/responses/Unauthorized'
+ *       403:
+ *         $ref: '#/components/responses/Forbidden'
  *       404:
  *         $ref: '#/components/responses/NotFound'
  */
@@ -172,4 +190,48 @@
  *           type: array
  *           items:
  *             $ref: '#/components/schemas/Category'
+ *     SuccessResponse:
+ *       type: object
+ *       properties:
+ *         status:
+ *           type: integer
+ *         success:
+ *           type: boolean
+ *         message:
+ *           type: string
+ *   responses:
+ *     BadRequest:
+ *       description: Bad request
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ErrorResponse'
+ *     Unauthorized:
+ *       description: Unauthorized
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ErrorResponse'
+ *     Forbidden:
+ *       description: Forbidden
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ErrorResponse'
+ *     NotFound:
+ *       description: Not found
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/ErrorResponse'
+ *   schemas:
+ *     ErrorResponse:
+ *       type: object
+ *       properties:
+ *         status:
+ *           type: integer
+ *         success:
+ *           type: boolean
+ *         message:
+ *           type: string
  */
