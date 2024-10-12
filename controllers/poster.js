@@ -122,3 +122,27 @@ exports.getPostersByCategoryId = async (req, res, next) => {
     next(error);
   }
 };
+
+// Get all posters by category name
+exports.getPostersByCategoryName = async (req, res, next) => {
+  try {
+    const { categoryName } = req.params;
+    const posters = await prisma.poster.findMany({
+      where: {
+        category: {
+          name: categoryName,
+        },
+      },
+      include: { category: true },
+    });
+
+    if (!posters.length) {
+      throw new CustomError('No posters found for this category', 404);
+    }
+
+    res.status(200).json(response(200, true, 'Posters retrieved successfully', posters));
+  } catch (error) {
+    console.log(`Error in getPostersByCategoryName: ${error.message}`);
+    next(error);
+  }
+};

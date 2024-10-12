@@ -6,7 +6,7 @@ const isAuth = require('../middleware/isAuth');
 const isAdmin = require('../middleware/isAdmin');
 
 const uploadConfig = {
-  destination: 'uploads/posters',
+  destination: 'uploads',
   fileTypes: ['images'],
   fileSizeLimit: 5 * 1024 * 1024, // 5MB limit
   filename: 'image',
@@ -19,5 +19,6 @@ router.get('/v1/poster/:id', posterController.getPosterById);
 router.put('/v1/poster/:id', isAdmin, uploadSingle(uploadConfig), posterController.updatePosterById);
 router.delete('/v1/poster/:id', isAdmin, posterController.deletePosterById);
 router.get('/v1/posters/category/:categoryId', posterController.getPostersByCategoryId);
+router.get('/v1/posters/category/name/:categoryName', posterController.getPostersByCategoryName);
 
 module.exports = router;
