@@ -10,6 +10,7 @@ require('dotenv').config();
 const AppError = require('./utils/error');
 const swaggerSpec = require('./config/swagger');
 const response = require('./utils/response');
+const adminRoutes = require('./routes/admin');
 const posterRoutes = require('./routes/poster');
 const categoryRoutes = require('./routes/category');
 
@@ -40,6 +41,7 @@ app.use(cors());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Add your routes...
+app.use('/api/admin', adminRoutes);
 app.use('/api/poster', posterRoutes);
 app.use('/api/category', categoryRoutes);
 
