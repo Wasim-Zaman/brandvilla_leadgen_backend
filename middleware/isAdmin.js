@@ -4,7 +4,7 @@ require('dotenv').config();
 const CustomError = require('../utils/error');
 
 module.exports = (req, res, next) => {
-  const authHeader = req.get('Authorization');
+  const authHeader = req.get('Authorization') || req.get('authorization');
 
   if (!authHeader) {
     const error = new CustomError('You are not authenticated.');
