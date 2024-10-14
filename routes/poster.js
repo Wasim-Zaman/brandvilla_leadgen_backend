@@ -8,7 +8,6 @@ const isAdmin = require('../middleware/isAdmin');
 const uploadConfig = {
   destination: 'uploads',
   fileTypes: ['images'],
-  fileSizeLimit: 5 * 1024 * 1024, // 5MB limit
   filename: 'image',
 };
 
