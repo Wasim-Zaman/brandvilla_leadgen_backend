@@ -29,16 +29,20 @@ exports.createCategory = async (req, res, next) => {
   }
 };
 
-// Get all categories
+// Get all categories with their posters
 exports.getCategories = async (req, res, next) => {
   try {
-    const categories = await prisma.category.findMany();
+    const categories = await prisma.category.findMany({
+      include: {
+        posters: true, // This includes the related posters for each category
+      },
+    });
 
     if (!categories.length) {
       throw new CustomError('No categories found', 404);
     }
 
-    res.status(200).json(response(200, true, 'Categories retrieved successfully', categories));
+    res.status(200).json(response(200, true, 'Categories with posters retrieved successfully', categories));
   } catch (error) {
     console.log(`Error in getCategories: ${error.message}`);
     next(error);
