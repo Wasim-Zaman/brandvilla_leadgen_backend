@@ -27,7 +27,7 @@ exports.createPoster = async (req, res, next) => {
     const newPoster = await prisma.poster.create({
       data: {
         ...value,
-        image: req.file.filename,
+        image: req.file.path,
       },
       include: { category: true },
     });
